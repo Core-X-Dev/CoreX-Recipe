@@ -1,0 +1,95 @@
+name: "CoreX Framework"
+author: "Legacy DEV Team"
+description: "A modular, high-performance FiveM roleplay framework with economy, vehicles, housing, jobs, inventory, and an advanced admin system."
+version: "0.0.1.0"
+
+# FXServer Minimum Required Version
+fxserverMinVersion: "12817"
+
+# Server Data Setup
+tasks:
+  # 1️⃣ Download & Move CoreX to ./resources/[CoreX]/CoreX
+  - action: download_github
+    src: https://github.com/LegacyAngel2K9/CoreX
+    ref: Alpha
+    dest: ./resources/[CoreX]/CoreX
+
+  # 2️⃣ Database Setup (Using oxmysql)
+  - action: connect_database
+  - action: query_database
+    file: ./resources/[CoreX]/CoreX/database/corex.sql
+  - action: query_database
+    file: ./resources/[CoreX]/CoreX/database/jobs.sql
+  - action: query_database
+    file: ./resources/[CoreX]/CoreX/database/economy.sql
+  - action: query_database
+    file: ./resources/[CoreX]/CoreX/database/inventory.sql
+  - action: query_database
+    file: ./resources/[CoreX]/CoreX/database/vehicles.sql
+  - action: query_database
+    file: ./resources/[CoreX]/CoreX/database/housing.sql
+
+  # 3️⃣ Install Base FiveM Resources
+  - action: download_github
+    src: https://github.com/citizenfx/cfx-server-data
+    subpath: resources
+    dest: ./resources/[cfx-default]
+
+  - action: remove_path
+    path: ./resources/[cfx-default]/[gameplay]/chat
+  
+  # Install oxmysql (Database Dependency)
+  - action: download_file
+    path: ./tmp/files/oxmysql.zip
+    url: https://github.com/overextended/oxmysql/releases/download/v2.11.2/oxmysql.zip
+  - action: unzip
+    dest: ./resources/[standalone]
+    src: ./tmp/files/oxmysql.zip
+
+  # 4️⃣ Install Additional Dependencies
+  - action: download_github
+    dest: ./resources/[standalone]/bob74_ipl
+    ref: master
+    src: https://github.com/qbcore-framework/bob74_ipl
+
+  - action: download_github
+    dest: ./resources/[standalone]/screenshot-basic
+    ref: master
+    src: https://github.com/citizenfx/screenshot-basic
+
+  - action: download_github
+    dest: ./resources/[standalone]/PolyZone
+    ref: master
+    src: https://github.com/qbcore-framework/PolyZone
+
+  - action: download_github
+    dest: ./resources/[voice]/pma-voice
+    ref: main
+    src: https://github.com/AvarianKnight/pma-voice
+
+  - action: download_github
+    dest: ./resources/[standalone]/interact-sound
+    ref: master
+    src: https://github.com/qbcore-framework/interact-sound
+
+  # 5️⃣ Set Server Configuration
+  - action: "setServerCFG"
+    data:
+      endpoint_add_tcp: "0.0.0.0:30120"
+      endpoint_add_udp: "0.0.0.0:30120"
+      ensure: 
+        - "oxmysql"
+        - "[CoreX]/CoreX"
+      sv_licenseKey: "REPLACE_WITH_YOUR_KEY"
+      set mysql_connection_string: "mysql://root:password@localhost/corex"
+      set onesync: "on"
+      set sv_enforceGameBuild: "3407"
+      set txAdmin: "true"
+      sv_hostname: "My CoreX Roleplay Server"
+      sv_maxClients: "48"
+      sv_scriptHookAllowed: "0"
+
+  # 6️⃣ Success Message
+  - action: "runCode"
+    code: |
+      print("^2CoreX Framework^0 installed successfully in ./resources/[CoreX]/CoreX via txAdmin recipe!")
