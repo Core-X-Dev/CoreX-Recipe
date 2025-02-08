@@ -43,32 +43,32 @@ tasks:
     path: ./tmp/files/oxmysql.zip
     url: https://github.com/overextended/oxmysql/releases/download/v2.11.2/oxmysql.zip
   - action: unzip
-    dest: ./resources/[standalone]
+    dest: ./resources/[StandAlone]
     src: ./tmp/files/oxmysql.zip
 
   # 4️⃣ Install Additional Dependencies
   - action: download_github
-    dest: ./resources/[standalone]/bob74_ipl
+    dest: ./resources/[StandAlone]/bob74_ipl
     ref: master
     src: https://github.com/qbcore-framework/bob74_ipl
 
   - action: download_github
-    dest: ./resources/[standalone]/screenshot-basic
+    dest: ./resources/[StandAlone]/screenshot-basic
     ref: master
     src: https://github.com/citizenfx/screenshot-basic
 
   - action: download_github
-    dest: ./resources/[standalone]/PolyZone
+    dest: ./resources/[StandAlone]/PolyZone
     ref: master
     src: https://github.com/qbcore-framework/PolyZone
 
   - action: download_github
-    dest: ./resources/[voice]/pma-voice
+    dest: ./resources/[Voice]/pma-voice
     ref: main
     src: https://github.com/AvarianKnight/pma-voice
 
   - action: download_github
-    dest: ./resources/[standalone]/interact-sound
+    dest: ./resources/[StandAlone]/interact-sound
     ref: master
     src: https://github.com/qbcore-framework/interact-sound
 
