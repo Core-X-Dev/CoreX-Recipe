@@ -1,7 +1,7 @@
 name: "CoreX Framework"
 author: "Legacy DEV Team"
 description: "A modular, high-performance FiveM roleplay framework with economy, vehicles, housing, jobs, inventory, and an advanced admin system."
-version: "0.0.1.3"
+version: "0.0.1.0"
 
 # FXServer Minimum Required Version
 fxserverMinVersion: "12817"
@@ -75,8 +75,3 @@ tasks:
   # 5️⃣ Clean Up Temporary Files
   - action: remove_path
     path: ./tmp
-
-  # 6️⃣ Success Message
-  - action: "runCode"
-    code: |
-      print("^2CoreX Framework^0 installed successfully via txAdmin recipe!")
