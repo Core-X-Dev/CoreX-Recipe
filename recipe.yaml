@@ -14,7 +14,17 @@ tasks:
     ref: Alpha
     dest: ./resources/[CoreX]/CoreX
 
-  # 2️⃣ Database Setup (Using oxmysql)
+  # 2️⃣ Server Config Setup
+  - action: download_github
+    src: https://github.com/LegacyAngel2K9/CoreX-Recipe
+    ref: main
+    dest: ./tmp/CoreX
+
+  - action: move_path
+    src: ./tmp/CoreX/server.cfg
+    dest: ./server.cfg
+
+  # 3️⃣ Database Setup (Using oxmysql)
   - action: connect_database
   - action: query_database
     file: ./resources/[CoreX]/CoreX/database/corex.sql
@@ -29,7 +39,7 @@ tasks:
   - action: query_database
     file: ./resources/[CoreX]/CoreX/database/housing.sql
 
-  # 3️⃣ Install Base FiveM Resources
+  # 4️⃣ Install Base FiveM Resources
   - action: download_github
     src: https://github.com/citizenfx/cfx-server-data
     subpath: resources
@@ -46,7 +56,7 @@ tasks:
     dest: ./resources/[StandAlone]
     src: ./tmp/files/oxmysql.zip
 
-  # 4️⃣ Install Additional Dependencies
+  # 5️⃣ Install Additional Dependencies
   - action: download_github
     dest: ./resources/[StandAlone]/bob74_ipl
     ref: master
@@ -72,6 +82,6 @@ tasks:
     ref: master
     src: https://github.com/qbcore-framework/interact-sound
 
-  # 5️⃣ Clean Up Temporary Files
+  # 6️⃣ Clean Up Temporary Files
   - action: remove_path
     path: ./tmp
