@@ -1,7 +1,7 @@
 name: "CoreX Framework"
 author: "Legacy DEV Team"
 description: "A modular, high-performance FiveM roleplay framework with economy, vehicles, housing, jobs, inventory, and an advanced admin system."
-version: "0.0.1.0"
+version: "0.0.1.3"
 
 # FXServer Minimum Required Version
 fxserverMinVersion: "12817"
@@ -72,24 +72,11 @@ tasks:
     ref: master
     src: https://github.com/qbcore-framework/interact-sound
 
-  # 5️⃣ Set Server Configuration
-  - action: "setServerCFG"
-    data:
-      endpoint_add_tcp: "0.0.0.0:30120"
-      endpoint_add_udp: "0.0.0.0:30120"
-      ensure: 
-        - "oxmysql"
-        - "[CoreX]/CoreX"
-      sv_licenseKey: "REPLACE_WITH_YOUR_KEY"
-      set mysql_connection_string: "mysql://root:password@localhost/corex"
-      set onesync: "on"
-      set sv_enforceGameBuild: "3407"
-      set txAdmin: "true"
-      sv_hostname: "My CoreX Roleplay Server"
-      sv_maxClients: "48"
-      sv_scriptHookAllowed: "0"
+  # 5️⃣ Clean Up Temporary Files
+  - action: remove_path
+    path: ./tmp
 
   # 6️⃣ Success Message
   - action: "runCode"
     code: |
-      print("^2CoreX Framework^0 installed successfully in ./resources/[CoreX]/CoreX via txAdmin recipe!")
+      print("^2CoreX Framework^0 installed successfully via txAdmin recipe!")
